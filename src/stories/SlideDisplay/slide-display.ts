@@ -1,5 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { RenderResult, render } from "@lit-labs/ssr";
 
 @customElement("slide-display")
 export class SlideDisplay extends LitElement {
@@ -69,7 +70,7 @@ export class SlideDisplay extends LitElement {
         >
           <div class="inner content">
             <div class="slot content">
-              <slot @slotchange=${this.handleSlotChange} />
+              <slot @slotchange=${this.handleSlotChange}></slot>
             </div>
             <div class="clones content"></div>
           </div>
@@ -110,19 +111,6 @@ export class SlideDisplay extends LitElement {
       animation-duration: var(--duration);
     }
 
-    .tag {
-      display: flex;
-      background-color: var(--secondary);
-      color: var(--secondary-text);
-      margin-right: 1rem;
-      white-space: nowrap;
-    }
-
-    .tag span {
-      font-size: 1.2rem;
-      color: #64748b;
-    }
-
     .fade {
       pointer-events: none;
       background: linear-gradient(
@@ -146,6 +134,9 @@ export class SlideDisplay extends LitElement {
     }
   `;
 }
+
+export const ssr = (slot: RenderResult) =>
+  render(html`<slide-display> ${slot} </slide-display>`);
 
 declare global {
   interface HTMLElementTagNameMap {

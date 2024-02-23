@@ -1,21 +1,23 @@
 {
   "name": "wc-pork-lib",
-  "private": true,
   "version": "0.0.1",
   "type": "module",
+  "main": "dist/wc-pork-lib.js",
   "files": [
     "dist"
   ],
-  "module": "dist/index.js",
+  "module": "dist/wc-pork-lib.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/my-lib.js"
+      "import": "./dist/wc-pork-lib.js"
     }
   },
   "scripts": {
     "build": "tsc && vite build",
+    "test": "web-test-runner test/**/*.test.ts --node-resolve",
+    "test:watch": "web-test-runner test/**/*.test.ts --node-resolve --watch",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepublishOnly": "pnpm run build"
@@ -24,6 +26,7 @@
     "lit": "^3.1.2"
   },
   "devDependencies": {
+    "@lit-labs/ssr": "^3.2.2",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-links": "^7.6.17",
     "@storybook/blocks": "^7.6.17",
